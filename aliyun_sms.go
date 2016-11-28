@@ -18,11 +18,11 @@ type AliyunSms struct {
 	TemplateCode string //模板code
 }
 
-func NewAliyunSms(sign_name string, template_code string, AccessKeyId string, access_secret string) (*AliyunSms, error) {
+func NewAliyunSms(sign_name string, template_code string, access_key_id string, access_secret string) (*AliyunSms, error) {
 	var a AliyunSms
 	a.SignName = sign_name
 	a.TemplateCode = template_code
-	a.AccessKeyID = AccessKeyId
+	a.AccessKeyID = access_key_id
 	a.AccessSecret = access_secret
 
 	return &a, nil
