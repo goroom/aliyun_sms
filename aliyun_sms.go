@@ -3,6 +3,7 @@ package aliyun_sms
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -45,7 +46,7 @@ func (this *AliyunSms) Send(numbers string, params string) error {
 	request.ParamString = params
 
 	url := request.ComposeUrl("GET", this.AccessSecret)
-
+	fmt.Println(url)
 	var resp *http.Response
 	var err error
 	resp, err = http.Get(url)

@@ -4,7 +4,6 @@ import (
 	"crypto/hmac"
 	"crypto/sha1"
 	"encoding/base64"
-	"fmt"
 	"net/url"
 	"sort"
 	"strings"
@@ -35,15 +34,13 @@ func (this *Request) signString(source string, access_secret string) string {
 	h := hmac.New(sha1.New, []byte(access_secret))
 	h.Write([]byte(source))
 
-	return base64.URLEncoding.EncodeToString(h.Sum(nil))
+	return base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
 
 func (this *Request) ComputeSignature(params map[string](string), method string, access_secret string) string {
 	var list []string
 	for k, v := range params {
-		_str := fmt.Sprint(v)
-		_str = url.QueryEscape(_str)
-		list = append(list, this.PercentEncode(k)+"="+_str)
+		list = append(list, this.PercentEncode(k)+"="+url.QueryEscape(v))
 	}
 	sort.Strings(list)
 
