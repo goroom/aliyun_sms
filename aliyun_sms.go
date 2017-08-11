@@ -1,11 +1,11 @@
 package aliyun_sms
 
 import (
-	"strings"
 	"encoding/json"
 	"errors"
 	"io/ioutil"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/goroom/rand"
@@ -67,6 +67,8 @@ func (this *AliyunSms) Send(numbers string, params string) error {
 	if ok && strings.ToUpper(message) == "OK" {
 		return nil
 	}
-
+	if ok {
+		return errors.New(message)
+	}
 	return errors.New("send sms error")
 }
