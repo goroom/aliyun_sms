@@ -37,7 +37,7 @@ func (this *AliyunSms) Send(numbers string, params string) error {
 	request.SignatureMethod = "HMAC-SHA1"
 	request.Timestamp = time.Now().UTC().Format("2006-01-02T15:04:05Z")
 	request.SignatureVersion = "1.0"
-	request.SignatureNonce = rand.String(16, rand.RST_NUMBER|rand.RST_LOWER)
+	request.SignatureNonce = rand.GetRand().String(16, rand.RST_NUMBER|rand.RST_LOWER)
 
 	request.Action = "SendSms"
 	request.SignName = this.SignName
